@@ -15,29 +15,43 @@ the model turned out to be wrong, and why.
 👉 **如果你只想知道「金魚死不死」,這裡沒有確定答案,而且是刻意沒有。**
 誠實的結論是:在目前的驗證程度下,還不到能給確定答案的階段。真正值得看的是
 [`article/article.md`](article/article.md) 裡的**思考演化圖**、**驗證路線圖**、
-**結論可信度表**、和**失敗紀錄(Failure Log)**。
+**結論可信度表**、和**驗證紀錄(Validation Log)**。
 
-## 現在的狀態:刻意停在整理階段,不再擴充模型
+這個repo真正想回答的問題,其實不是「金魚有沒有死」,而是:
 
-上一輪的產出不是「更複雜的模型」,而是回頭做這幾件事:
-1. 整理哪些結論穩健、哪些不穩健(見 article.md 的可信度表)
-2. 把每一次模型被推翻的過程完整記錄下來(見 Failure Log)
-3. 畫出目前在 Validation Roadmap 上的實際位置(Level 2 完成,Level 3 未做)
+> **我們怎麼知道自己的答案值得相信?**
+> **How do we know our answer is trustworthy?**
 
-**下一步是無因次分析(Level 3),不是 fish_ode_model6.py。**
+## 現在的狀態:Level 3(無因次分析)進行到一半,刻意不急著擴充模型
+
+最新進度:把原本二維的相圖(房間體積 × 水缸-火源距離)嘗試用單一無因次群 $\Pi_{heat}$ collapse——
+第一次嘗試測出92.4%準確率,但發現是循環論證(用了模擬輸出當分子);推翻重做後,改用純輸入參數,
+收斂到 **95.1%**,但公式裡留了一個**刻意不校準**的自由參數(0.3係數,物理意義未知)。
+完整過程見 article.md 的 **VL-05**。
+
+下一步優先順序:
+1. 把水缸體積、燃料量、牆體材質也納入同一組collapse測試,看能不能解釋剩下的5%、或找出0.3係數對應的機制
+2. 找出這個 $\Pi$ 群會在什麼參數範圍失效
+3. 只有在0D+無因次分析的機制層級價值被榨乾之後,才進 Level 4(two-zone / CFAST交叉驗證)
+4. CFD 和文獻比對排在更後面
+
+**不寫 fish_ode_model6.py。** 這個專案累積洞見的速度,目前比堆疊模型複雜度更有價值。
 
 ## 目錄結構
 
 ```
 .
 ├── article/
-│   └── article.md          # 完整案例研究:思考演化圖/驗證路線圖/可信度表/失敗紀錄
+│   └── article.md          # 完整案例研究:思考演化圖/驗證路線圖/可信度表/Validation Log
 ├── code/
 │   ├── fish_ode_model5.py  # 目前最終版0D模型(牆體材質可調,已知有未修正的結構性限制)
 │   ├── sweep.py             # 房間體積 x 水缸距離 相圖掃描
 │   ├── sensitivity.py       # χ_r / h_conv / kLa 敏感度測試
 │   ├── wall_sensitivity.py  # 牆體材質敏感度測試
-│   └── timehistory*.py      # 各修正階段的時間歷程分析(含已知的bug版本,刻意保留)
+│   ├── timehistory*.py      # 各修正階段的時間歷程分析(含已知的bug版本,刻意保留)
+│   ├── dimensionless.py     # 無因次分析v1(循環論證版,刻意保留)
+│   ├── dimensionless_v2.py  # 無因次分析v2(input-only修正版,95.1%)
+│   └── collapse_analysis.py # 2D相圖→1D Π群 collapse可視化
 ├── figures/                 # 所有輸出圖檔(PNG)
 └── README.md
 ```
