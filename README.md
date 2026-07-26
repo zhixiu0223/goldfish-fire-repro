@@ -72,4 +72,4 @@ pip install numpy scipy matplotlib
 
 ## 授權
 
-程式碼與文件皆為分析過程記錄,依個人需求自由使用。
+MIT License,詳見 [`LICENSE`](LICENSE)。

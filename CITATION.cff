@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use or reference this work, please cite it as below."
+title: "goldfish-fire-repro: A Computational Thinking Case Study — From an Ill-Posed Brain Teaser to a Parameterized Engineering Model"
+type: software
+authors:
+  - given-names: Zhixiu
+    alias: zhixiu0223
+repository-code: "https://github.com/zhixiu0223/goldfish-fire-repro"
+url: "https://github.com/zhixiu0223/goldfish-fire-repro"
+license: MIT
+version: 0.1.0-draft
+date-released: 2026-07-26
+keywords:
+  - fire dynamics
+  - compartment fire
+  - sensitivity analysis
+  - dimensionless analysis
+  - verification and validation
+  - reproducible research
+  - computational thinking
+abstract: >
+  A 0D lumped-parameter ODE model exploring whether heat or hypoxia
+  dominates goldfish mortality in a sealed-room compartment fire —
+  used as a vehicle for a broader case study in engineering
+  verification methodology. Originates from a popular brain teaser
+  and an observation that different LLMs gave inconsistent answers
+  to it. The repository documents the full iterative process,
+  including model bugs found and fixed, a circular-reasoning mistake
+  in an early dimensionless-analysis attempt, and open questions
+  that remain unresolved. This is a working draft, not an
+  independently validated engineering conclusion — see
+  article/article.md for the confidence table, validation log, and
+  known limitations.
