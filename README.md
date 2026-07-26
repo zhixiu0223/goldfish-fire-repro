@@ -1,5 +1,7 @@
 # goldfish-fire-repro
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21610403.svg)](https://doi.org/10.5281/zenodo.21610403)
+
 **Computational Thinking Case Study — not a fire model of goldfish survival.**
 
 From a popular brain teaser ("Can goldfish survive a severe fire in a sealed room?"),
